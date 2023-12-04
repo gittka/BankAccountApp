@@ -23,30 +23,28 @@ public class AccountServiceApplication {
 
     @Bean
     CommandLineRunner runner(AccountRepository accountRepository, CustomerRestClient customerRestClient) {
-        return args -> {
-            customerRestClient.getCustomers().forEach(customer -> {
-                BankAccount account =  BankAccount.builder().
-                        accountID(UUID.randomUUID().toString()).
-                        accountType(AccountType.CURRENT_ACCOUNT).
-                        currency("USD").
-                        customerID(customer.getId()).
-                        balance(Math.random() * 1000)
-                        .dateCreated(LocalDate.now())
-                        .build();
+        return args -> customerRestClient.getCustomers().forEach(customer -> {
+            BankAccount account =  BankAccount.builder().
+                    accountID(UUID.randomUUID().toString()).
+                    accountType(AccountType.CURRENT_ACCOUNT).
+                    currency("USD").
+                    customerID(customer.getId()).
+                    balance(Math.random() * 1000)
+                    .dateCreated(LocalDate.now())
+                    .build();
 
-                BankAccount account2 =  BankAccount.builder().
-                        accountID(UUID.randomUUID().toString()).
-                        accountType(AccountType.SAVING_ACCOUNT).
-                        currency("USD").
-                        customerID(customer.getId()).
-                        balance(Math.random() * 1000)
-                        .dateCreated(LocalDate.now())
-                        .build();
+            BankAccount account2 =  BankAccount.builder().
+                    accountID(UUID.randomUUID().toString()).
+                    accountType(AccountType.SAVING_ACCOUNT).
+                    currency("USD").
+                    customerID(customer.getId()).
+                    balance(Math.random() * 1000)
+                    .dateCreated(LocalDate.now())
+                    .build();
 
-                accountRepository.save(account);
-                accountRepository.save(account2);
-            });
-        };
+            accountRepository.save(account);
+            accountRepository.save(account2);
+        });
     }
 
 }
