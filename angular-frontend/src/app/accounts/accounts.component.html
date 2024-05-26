@@ -1,0 +1,29 @@
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <table *ngIf="accounts" class="table table-striped">
+        <thead>
+        <tr>
+          <th>N</th>
+          <th>Balance</th>
+          <th>Type</th>
+          <th>Currency</th>
+          <th>Customer Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let account of accounts; let i = index">
+          <td>{{ i+1 }}</td>
+          <td>{{ account.balance | currency }}</td>
+          <td >
+            <ng-container *ngIf="account.accountType == 'CURRENT_ACCOUNT'; else saving">Compte Courant</ng-container>
+            <ng-template #saving>Compte Epargne</ng-template>
+          </td>
+          <td>{{ account.currency }}</td>
+          <td>{{ account.customer.firstName }} {{ account.customer.lastName }}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

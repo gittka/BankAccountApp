@@ -1,7 +1,6 @@
 package com.alxtek.customerservice.controller;
 
 import com.alxtek.customerservice.dto.CustomerDtoResponse;
-import com.alxtek.customerservice.entities.Customer;
 import com.alxtek.customerservice.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

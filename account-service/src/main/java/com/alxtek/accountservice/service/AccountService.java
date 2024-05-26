@@ -14,6 +14,7 @@ import java.util.List;
 public class AccountService {
     private final AccountRepository accountRepository;
     private final CustomerRestClient customerRestClient;
+    
 
     public List<BankAccountDtoResponse> accountList() {
         return accountRepository.findAll().stream().map(account -> BankAccountDtoResponse.builder()
@@ -22,7 +23,7 @@ public class AccountService {
                         .dateCreated(account.getDateCreated())
                         .accountID(account.getAccountID())
                         .customerID(account.getCustomerID())
-                        .customer(account.getCustomer())
+                        .customer(customerRestClient.findCustomerById(account.getCustomerID()))
                         .balance(account.getBalance())
                         .build())
                 .toList();
